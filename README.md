@@ -16,6 +16,7 @@ https://github.com/mirnak524/Stitch-Tracker/blob/main/assets/demo.mov
 ## How it Works
 ![Block Diagram](assets/Stitch%20Block.svg)
 | Module | Role |
+| --- | --- |
 | `stitch_top` | Top level that wires everything together |
 | `stitch_ctrl` | Holds the pattern ROM, tracks current position, outputs current and next stitch codes and colors, and flags when the pattern is done |
 | `enc_decoder` | Decodes the encoder's A/B quadrature signals into clockwise and counterclockwise pulses |
@@ -25,9 +26,15 @@ https://github.com/mirnak524/Stitch-Tracker/blob/main/assets/demo.mov
 
 **Controls:** one touch on the capacitive button advances one stitch. Turning the encoder clockwise advances and counterclockwise goes back. Button 0 resets, and LED0 lights at the end of the pattern
 
-**Pin mapping:** OLED on PMOD JA, rotary encoder on JB, touch button on JC, 125 MHz system clock. 
-
-## Improvements
-The design was originally made with gesture recognition in mind so the pattern would automatically progress, and the accelerometer path was made. The intention was to integrate an ADXL345 over SPI, with the data sent over UART to a Python script. This data never came back usable, so the project pivoted to the touch button advancement. 
+**Pin mapping:** OLED on PMOD JA, rotary encoder on JB, touch button on JC, 125 MHz system clock.  
 
 ![FSM](assets/Stitch%20Tracker.svg)
+
+## Improvements
+- The design was originally made with gesture recognition in mind so the pattern would automatically progress, and the accelerometer path was made. The intention was to integrate an ADXL345 over SPI, with the data sent over UART to a Python script. This data never came back usable, so the project pivoted to the touch button advancement.
+- The pattern is hardcoded, loading patterns from an SD could be an improvement
+- Only single, double, and chain stitches are defined, more variation could be added here
+
+### Credits
+- OLED driver uses Digilent's SpiCtrl, Delay and charLib IP
+- ADXL345 SPI controller is Digikey's
